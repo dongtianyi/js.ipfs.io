@@ -50,7 +50,10 @@ class Hero extends Component {
     return (
       <div className={ styles.container }>
         <div className={ styles.orbitContainer } >
-          <div className={ styles.orbits }> <OrbitsSvg /> </div>
+          <div className={ styles.orbits }>
+            <OrbitsSvg />
+            {/* <img src="//sergeche.github.io/gpu-article-assets/images/sun-full.png" className={ styles.sun } /> */}
+          </div>
         </div>
         <div className={ styles.content }>
           <img src={ cubePng } />

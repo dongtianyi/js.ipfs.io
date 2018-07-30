@@ -15,7 +15,7 @@ class GatewaySection extends Component {
   state = {
     isActive: false,
     inView: false,
-    incompatible: false,
+    incompatible: !isCompatible(),
     inProgress: false
   }
 
@@ -25,8 +25,6 @@ class GatewaySection extends Component {
         registration && this.setState({ isActive: true })
       })
       .catch((err) => console.error(err))
-
-    this.setState({ icompatible: !(isCompatible()) })
   }
 
   render () {

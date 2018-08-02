@@ -13,7 +13,6 @@ import {
   transformCode,
   log,
   getIpfs,
-  preload,
   codeAdd,
   codeGet
 } from 'utils/react-live-utils'
@@ -25,10 +24,12 @@ const CID_LENGTH = 46
 
 class GettingStarted extends Component {
   state = {
+    runAdd: false,
+    runGet: false,
     ipfsLoaded: false,
-    outputAdd: null,
-    outputGet: null,
-    cid: null
+    outputAdd: '',
+    outputGet: '',
+    cid: 'QmPChd2hVbrJ6bfo3WBcTW4iZnpHm8TEzWkLHmLpXhF68A'
   }
 
   constructor (props) {
@@ -56,6 +57,8 @@ class GettingStarted extends Component {
     const { intl: { messages } } = this.props
     const {
       cid,
+      runAdd,
+      runGet,
       outputAdd,
       outputGet,
       ipfsLoaded
@@ -84,7 +87,7 @@ class GettingStarted extends Component {
                 <pre>
                   <code>{ outputAdd }</code>
                 </pre>
-                { ipfsLoaded && <LivePreview/> }
+                { (ipfsLoaded && runAdd) && <LivePreview/> }
                 { ipfsLoaded && <LiveError/> }
               </div>
             </LiveProvider>
@@ -101,14 +104,14 @@ class GettingStarted extends Component {
                 <pre>
                   <code>{ outputGet }</code>
                 </pre>
-                { (ipfsLoaded && cid) && <LivePreview/> }
+                { (ipfsLoaded && runGet) && <LivePreview/> }
                 { ipfsLoaded && <LiveError/> }
               </div>
             </LiveProvider>
             <p className={ styles.liveSnippetSubtitle }>{ messages.gettingStarted.usingCli }</p>
             <div className={ styles.liveSnippetCliContainer }>
               <SyntaxHighlighter codeStr={ `npm install ipfs -g
-jsipfs get ${cid}` } language='bash' />
+jsipfs cat ${cid}` } language='bash' />
             </div>
 
             <p className={ styles.liveSnippetSubtitle }>{ messages.gettingStarted.usingGateway }</p>
@@ -130,23 +133,21 @@ jsipfs get ${cid}` } language='bash' />
     }
 
     if (editor === 'add') {
+      if (typeof content === 'string' && content.length === CID_LENGTH && content !== this.state.cid) {
+        this.setState({cid: content})
+      }
       this.setState({outputAdd: content})
     } else {
       this.setState({outputGet: content})
-    }
-
-    if (content) {
-      if (typeof content === 'string' && content.length === CID_LENGTH && content !== this.state.cid) {
-        preload(content)
-        this.setState({cid: content})
-      }
     }
   }
 
   handleRunClick = (editor) => () => {
     if (editor === 'add') {
+      this.setState({ runAdd: true, runGet: false, outputGet: '' })
       this.refAdd.current.run()
     } else {
+      this.setState({ runGet: true })
       this.refGet.current.run()
     }
   }

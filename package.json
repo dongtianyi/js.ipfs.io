@@ -11,8 +11,8 @@
     "gatsby": "^1.9.247",
     "gatsby-link": "^1.6.40",
     "gatsby-plugin-ipfs": "^1.0.0",
+    "gatsby-plugin-manifest": "^1.0.27",
     "gatsby-plugin-react-helmet": "^2.0.10",
-    "gatsby-plugin-react-svg": "^1.1.1",
     "intersection-observer": "~0.5.0",
     "ipfs-postmsg-proxy": "^2.16.1",
     "lodash": "^4.17.10",
@@ -24,15 +24,15 @@
     "react-dom": "^16.4.1",
     "react-helmet": "^5.2.0",
     "react-intl": "^2.4.0",
-    "react-markdown": "3.3.4",
     "react-live": "^1.11.0",
+    "react-markdown": "^3.4.1",
     "react-onclickoutside": "^6.7.1",
     "react-scroll-to-component": "^1.0.2",
     "react-slick": "~0.23.1",
     "react-toastify": "^4.1.0",
     "react-tooltip": "^3.6.1",
     "recompose": "~0.27.1",
-    "service-worker-gateway": "~0.1.6",
+    "service-worker-gateway": "~0.1.7",
     "slick-carousel": "^1.8.1"
   },
   "keywords": [
@@ -43,6 +43,7 @@
   ],
   "license": "MIT",
   "scripts": {
+    "prebuild": "rimraf public",
     "build": "gatsby build --prefix-paths",
     "develop": "gatsby develop",
     "lint": "aegir lint && stylelint \"**/*.css\"",
@@ -57,10 +58,16 @@
     "eslint-config-aegir": "^1.0.1",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-react": "^7.10.0",
+    "external-svg-sprite-loader": "^2.0.0",
     "postcss-reporter": "^5.0.0",
+    "raw-loader": "~0.5.1",
+    "rimraf": "^2.6.2",
     "serviceworker-webpack-plugin": "~0.2.3",
     "stylelint": "^9.2.0",
-    "stylelint-config-moxy": "^5.0.0"
+    "stylelint-config-moxy": "^5.0.0",
+    "svg-css-modules-loader": "^1.6.1",
+    "svgo": "^1.0.5",
+    "svgo-loader": "^2.1.0"
   },
   "browserslist": [
     "last 1 Chrome versions",

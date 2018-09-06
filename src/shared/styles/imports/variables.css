@@ -37,8 +37,8 @@
    ========================================================================== */
 
 :root {
-  --typography-display-font: "Montserrat", sans-serif;
-  --typography-text-font: "Montserrat", sans-serif;
+  --typography-display-font: "Montserrat", Verdana, sans-serif;
+  --typography-text-font: "Montserrat", Tahoma, Verdana, sans-serif;
   --typography-roboto-text-font: "Roboto", sans-serif;
   --typography-text-size-large: 18px;
   --typography-text-size: 15px;
@@ -56,7 +56,6 @@
    ========================================================================== */
 
 :root {
-  --bottom-half-height: 22px;
   --container-width: 80%;
   --container-width-mobile: 89%;
   --max-container-width: 1440px;
@@ -67,5 +66,5 @@
   --line-height-small: 24px;
   --line-height-medium: 27px;
   --line-height-large: 48px;
-  --navbar-desktop-height: 66px;
+  --nav-bar-desktop-height: 66px;
 }

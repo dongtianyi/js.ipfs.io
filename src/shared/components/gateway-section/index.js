@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import { isCompatible, register, unregister, getRegistration } from 'shared/service-worker/registration'
 import Observer from '@researchgate/react-intersection-observer'
 
-import GatewaySvgAnimation from 'shared/components/gateway-section/gateway-svg-animation'
+import GatewaySvgAnimation from './gateway-svg-animation'
 import ToggleButton from './toggle-button'
 import styles from './index.module.css'
 
@@ -19,7 +19,8 @@ class GatewaySection extends Component {
     inView: false,
     incompatible: false,
     inProgress: false,
-    isMessageVisible: true
+    isMessageVisible: true,
+    renderGateway: false
   }
 
   componentDidMount () {
@@ -29,7 +30,7 @@ class GatewaySection extends Component {
       })
       .catch((err) => console.error(err))
 
-    this.setState({ incompatible: !(isCompatible()) })
+    this.setState({ renderGateway: true, incompatible: !isCompatible() })
   }
 
   componentWillUnmount () {
@@ -37,7 +38,7 @@ class GatewaySection extends Component {
   }
 
   componentDidUpdate (prevProps, prevState) {
-    if (!prevState.isActive && this.state.isActive) {
+    if ((!prevState.isActive && this.state.isActive) && this.state.inView) {
       this.scrollTimeout = setTimeout(() => {
         scrollToComponent(this.sectionContainerRef, defaultScrollOptions)
       }, 2300)
@@ -45,7 +46,7 @@ class GatewaySection extends Component {
   }
 
   render () {
-    const { isActive, inView, incompatible, inProgress, isMessageVisible } = this.state
+    const { isActive, inView, incompatible, inProgress, isMessageVisible, renderGateway } = this.state
     const { messages } = this.props.intl
     const contentClasses = classNames(styles.content, {
       [styles.active]: isActive
@@ -58,13 +59,18 @@ class GatewaySection extends Component {
           <span className={ styles.sectionDescription }>
             <p>{ messages.serviceWorker.sectionDesc }</p>
           </span>
-          <Observer onChange={ this.handleObserverChange } >
-            <GatewaySvgAnimation isActive={ isActive }
-              inView={ inView }
-              isMessageVisible={ isMessageVisible }
-              onMessageCloseClick={ this.handleCloseClick }
-            />
-          </Observer>
+          <div className={ styles.gatewayContainer }>
+            { renderGateway && (
+              <Observer onChange={ this.handleObserverChange }>
+                <GatewaySvgAnimation
+                  isActive={ isActive }
+                  inView={ inView }
+                  isMessageVisible={ isMessageVisible }
+                  onMessageCloseClick={ this.handleCloseClick }
+                />
+              </Observer>
+            ) }
+          </div>
           <ToggleButton
             isActive={ isActive }
             onClick={ this.handleToggleClick }

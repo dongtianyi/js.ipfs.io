@@ -1,7 +1,7 @@
 import React from 'react'
 import { injectIntl } from 'react-intl'
 import PropTypes from 'prop-types'
-import FeatureItem from 'shared/components/features-section/feature-item'
+import FeatureItem from './feature-item'
 import ReactMarkdown from 'react-markdown'
 
 import featsArr from 'shared/data/features'
@@ -12,11 +12,14 @@ const Features = ({ intl: { messages } }) => {
   const translationFeats = messages.features.list
   const feats = featsArr.map((feat, index) => {
     const translationFeat = translationFeats[feat.translationListIndex]
+
     return (
-      <FeatureItem key={ `feat-${index}` }
+      <FeatureItem
+        key={ `feat-${index}` }
+        className={ styles.featuresItem }
         title={ translationFeat.title }
         description={ translationFeat.desc }
-        icon={ feat.icon } />
+        image={ feat.image } />
     )
   })
 
@@ -28,6 +31,11 @@ const Features = ({ intl: { messages } }) => {
         <ReactMarkdown className={ styles.sectionDescription } source={ messages.features.sectionDesc } />
         <div className={ styles.featuresContainer }>
           { feats }
+          { /* Repeat max items per row so that columns are aligned */ }
+          <div className={ styles.featuresItem } />
+          <div className={ styles.featuresItem } />
+          <div className={ styles.featuresItem } />
+          <div className={ styles.featuresItem } />
         </div>
       </div>
     </div>

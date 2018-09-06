@@ -69,7 +69,6 @@
 
     & .socialLinksContainer {
       position: relative;
-      min-width: 100%;
       z-index: 5;
       margin-top: 35px;
       display: flex;
@@ -108,14 +107,20 @@
       display: none;
     }
 
-    & .content .socialLinksContainer {
-      min-width: unset;
+    & .content {
+      width: var(--container-width-mobile);
 
-      & .socialLinks {
-        flex-direction: column;
+      & .sectionDescription p {
+        width: 95%;
+      }
 
-        & > * {
-          margin-top: 12px;
+      & .socialLinksContainer {
+        & .socialLinks {
+          flex-direction: column;
+
+          & > * {
+            margin-top: 12px;
+          }
         }
       }
     }

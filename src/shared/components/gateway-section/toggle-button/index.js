@@ -28,7 +28,7 @@ class ToggleButton extends Component {
           <span className={ sliderClasses } />
         </label>
         <span className={ titleClasses }>
-          { inProgress && !isActive ? messages.serviceWorker.activatingToggleText : messages.serviceWorker.toggleText }
+          { this.getToggleText() }
         </span>
         {
           incompatible && (
@@ -43,6 +43,15 @@ class ToggleButton extends Component {
 
   handleToggleButton = () => {
     this.props.onClick()
+  }
+
+  getToggleText = () => {
+    const { isActive, inProgress, intl: { messages } } = this.props
+
+    if (!isActive) {
+      return (!inProgress ? messages.serviceWorker.toggleText : messages.serviceWorker.activatingToggleText)
+    }
+    return messages.serviceWorker.activatedToggleText
   }
 }
 

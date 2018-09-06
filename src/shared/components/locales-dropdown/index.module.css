@@ -11,7 +11,7 @@
   }
 
   & .dropButton {
-    padding-top: 7px;
+    padding: 7px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -19,7 +19,7 @@
     background: transparent;
     color: var(--color-white);
     cursor: pointer;
-    transition: var(--transition-default-duration) ease;
+    transition: color var(--transition-default-duration) ease;
 
     &:hover {
       color: var(--color-yellow);
@@ -41,16 +41,19 @@
       border-top: 1px solid var(--color-white);
       border-right: 1px solid var(--color-white);
       pointer-events: none;
-      transition: var(--transition-default-duration) ease;
+      transition:
+        transform var(--transition-default-duration) ease,
+        margin-top var(--transition-default-duration) ease,
+        margin-bottom var(--transition-default-duration) ease;
     }
 
     & .arrowBottom {
-      margin-top: -7px;
+      margin-top: -4px;
       transform: rotate(135deg);
     }
 
     & .arrowTop {
-      margin-bottom: -7px;
+      margin-bottom: -8px;
       transform: rotate(-45deg);
     }
   }
@@ -75,10 +78,6 @@
       color: var(--color-white);
       text-decoration: none;
       text-align: left;
-
-      &:last-child {
-        border-bottom: unset;
-      }
 
       &:hover {
         color: var(--color-yellow);
